@@ -177,12 +177,16 @@ const awards = [
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
-  const scrollToSection = (id) => {
+  // type SectionId = "home" | "breweries" | "schedule" | "awards" | "voting";
+
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
+      setActiveSection(id);
     }
   };
 
@@ -260,25 +264,41 @@ const Index = () => {
               <div className="flex flex-col space-y-3">
                 <button
                   onClick={() => scrollToSection("home")}
-                  className="text-left hover:text-festival-gold py-2"
+                  className={`${
+                    activeSection === "home"
+                      ? "text-festival-gold font-semibold"
+                      : "text-foreground"
+                  } hover:text-festival-gold`}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => scrollToSection("breweries")}
-                  className="text-left hover:text-festival-gold py-2"
+                  className={`${
+                    activeSection === "breweries"
+                      ? "text-festival-gold font-semibold"
+                      : "text-foreground"
+                  } hover:text-festival-gold`}
                 >
                   Breweries
                 </button>
                 <button
                   onClick={() => scrollToSection("schedule")}
-                  className="text-left hover:text-festival-gold py-2"
+                  className={`${
+                    activeSection === "schedule"
+                      ? "text-festival-gold font-semibold"
+                      : "text-foreground"
+                  } hover:text-festival-gold`}
                 >
                   Schedule
                 </button>
                 <button
                   onClick={() => scrollToSection("awards")}
-                  className="text-left hover:text-festival-gold py-2"
+                  className={`${
+                    activeSection === "awards"
+                      ? "text-festival-gold font-semibold"
+                      : "text-foreground"
+                  } hover:text-festival-gold`}
                 >
                   Awards
                 </button>
@@ -305,11 +325,11 @@ const Index = () => {
 
         <div className="relative z-10 container mx-auto px-4 pt-20 pb-16 min-h-screen flex flex-col justify-center">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border mb-8">
+            {/* <div className="inline-flex items-center px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border mb-8">
               <span className="text-festival-gold font-semibold">
                 CBAC Presents
               </span>
-            </div>
+            </div> */}
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent leading-tight">
               Cambodian Craft Beer Crown
@@ -711,12 +731,7 @@ const Index = () => {
           </div>
 
           <div className="pt-8 border-t border-border">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="text-center md:text-left">
-                <p className="text-muted-foreground">
-                  © 2025 Cambodian Craft Beer Association. All rights reserved.
-                </p>
-              </div>
+            <div className="flex flex-col md:flex-col items-center justify-center space-y-4 md:space-y-4">
               <div className="flex items-center space-x-6">
                 <button
                   onClick={() => scrollToSection("home")}
@@ -736,6 +751,12 @@ const Index = () => {
                 >
                   Vote
                 </button>
+              </div>
+
+              <div className="text-center md:text-left">
+                <p className="text-muted-foreground">
+                  © 2025 Cambodian Craft Beer Association. All rights reserved.
+                </p>
               </div>
             </div>
           </div>
